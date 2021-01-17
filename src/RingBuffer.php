@@ -2,6 +2,8 @@
 
 namespace GuitarHero;
 
+use RuntimeException;
+
 class RingBuffer
 {
     private int $capacity;
