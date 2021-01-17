@@ -1,0 +1,19 @@
+{
+    "name": "algh/course-work",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Constantin Gordienko",
+            "email": "gordienko.c@gmail.com"
+        }
+    ],
+    "require": {
+        "nkolosov/wav": "dev-master",
+        "davefx/phplot": "^6.2",
+        "react/http": "^1.2",
+        "react/stream": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {"GuitarHero\\": "src/"}
+    }
+}
