@@ -6,8 +6,6 @@ function playKeyboard(){
 	var isMobile = !!navigator.userAgent.match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile/i);
 	if(isMobile) { var evtListener = ['touchstart', 'touchend']; } else { var evtListener = ['mousedown', 'mouseup']; }
 
-	var __audioSynth = new AudioSynth();
-	__audioSynth.setVolume(0.5);
 	var __octave = 4; //sets position of middle C, normally the 4th octave
 	
 
@@ -213,7 +211,7 @@ function playKeyboard(){
 
 	var iKeys = 0;
 	var iWhite = 0;
-	var notes = __audioSynth._notes; //C, C#, D....A#, B
+	var notes = {'C':261.63,'C#':277.18,'D':293.66,'D#':311.13,'E':329.63,'F':349.23,'F#':369.99,'G':392.00,'G#':415.30,'A':440.00,'A#':466.16,'B':493.88};
 
 	for(var i=-2;i<=1;i++) {
 		for(var n in notes) {
@@ -302,8 +300,7 @@ function playKeyboard(){
 	}
 	// Generates audio for pressed note and returns that to be played
 	var fnPlayNote = function(note, octave) {
-
-		src = __audioSynth.generate(selectSound.value, note, octave, 2);
+		src = 'http://127.0.0.1:8000/?note=' + encodeURIComponent(note) + '_' + octave;
 		container = new Audio(src);
 		container.addEventListener('ended', function() { container = null; });
 		container.addEventListener('loadeddata', function(e) { e.target.play(); });
@@ -311,7 +308,6 @@ function playKeyboard(){
 		container.setAttribute('type', 'audio/wav');
 		container.load();
 		return container;
-	
 	};
 
 	//returns correct string for display
