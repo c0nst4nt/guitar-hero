@@ -22,7 +22,7 @@ $notes = [
     ['G#', 2, 1],
     ['A',  2, 1],
     ['A#', 2, 1],
-    ['B',  2, 1],
+    ['H',  2, 1],
     ['C',  3, 1],
     ['C#', 3, 1],
     ['D',  3, 1],
@@ -34,7 +34,7 @@ $notes = [
     ['G#', 3, 1],
     ['A',  3, 1],
     ['A#', 3, 1],
-    ['B',  3, 1],
+    ['H',  3, 1],
     ['C',  4, 1],
     ['C#', 4, 1],
     ['D',  4, 1],
@@ -46,7 +46,7 @@ $notes = [
     ['G#', 4, 1],
     ['A',  4, 1],
     ['A#', 4, 1],
-    ['B',  4, 1],
+    ['H',  4, 1],
     ['C',  5, 1],
     ['C#', 5, 1],
     ['D',  5, 1],
@@ -58,7 +58,7 @@ $notes = [
     ['G#', 5, 1],
     ['A',  5, 1],
     ['A#', 5, 1],
-    ['B',  5, 1],
+    ['H',  5, 1],
 ];
 
 $samplesArray = [];
@@ -82,5 +82,11 @@ foreach ($notes as $chromaticNote) {
         ->setSamples([$noteSample]);
 
     $audio = $builder->build();
+
+    // Converting note names to different system
+    if ($note === 'H') {
+        $note = 'B';
+    }
+
     $audio->saveToFile(__DIR__  . '/../generated/audio/notes/' . $note . '_' . $octave .'.wav');
 }
