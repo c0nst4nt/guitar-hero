@@ -4,6 +4,8 @@ use GuitarHero\GuitarStringSynthesizer;
 
 require_once './vendor/autoload.php';
 
+ini_set('error_reporting', E_ALL & ~E_NOTICE & ~E_DEPRECATED);
+
 // A note (1 octave)
 $aNoteFrequency = 440.0;
 $synth = new GuitarStringSynthesizer($aNoteFrequency, 1);
