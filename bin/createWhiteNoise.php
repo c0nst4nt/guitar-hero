@@ -1,5 +1,6 @@
 <?php
 
+use GuitarHero\PlotGenerator;
 use Wav\Builder;
 use Wav\Sample;
 use Wav\WaveFormat;
@@ -13,16 +14,7 @@ for ($i = 0; $i < 100; $i++) {
     $generatedNoiseSmall[] = ['', $i, mt_rand(-0.5 * 1000000, 0.5 * 1000000) / 1000000];
 }
 
-$plot = new \PHPlot(800, 600);
-$plot->SetImageBorderType('plain');
-$plot->SetPlotType('lines');
-$plot->SetDataType('data-data');
-$plot->SetDataValues($generatedNoiseSmall);
-$plot->SetTitle('');
-$plot->SetPlotAreaWorld(NULL, -0.5, NULL, NULL);
-$plot->SetIsInline(true);
-$plot->SetOutputFile('./generated/images/white_noise_example_short.png');
-$plot->DrawGraph();
+PlotGenerator::generate($generatedNoiseSmall, 'White noise, small', './generated/images/white_noise_example_short.png', -0.5);
 
 $generatedNoise = [];
 for ($i = 0; $i < 44100; $i++) {
@@ -31,16 +23,7 @@ for ($i = 0; $i < 44100; $i++) {
     $generatedNoise[] = ['', $i, $sample];
 }
 
-$plot = new \PHPlot(800, 600);
-$plot->SetImageBorderType('plain');
-$plot->SetPlotType('lines');
-$plot->SetDataType('data-data');
-$plot->SetDataValues($generatedNoise);
-$plot->SetTitle('');
-$plot->SetPlotAreaWorld(NULL, -17768, NULL, NULL);
-$plot->SetIsInline(true);
-$plot->SetOutputFile('./generated/images/white_noise_example_long.png');
-$plot->DrawGraph();
+PlotGenerator::generate($generatedNoise, 'White noise, long', './generated/images/white_noise_example_long.png', -17768);
 
 $sample = new Sample(sizeof($samples), implode('', $samples));
 

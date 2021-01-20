@@ -40,16 +40,7 @@ class GuitarStringSynthesizer
 
     public function drawWavePicture(string $plotName, string $filename)
     {
-        $plot = new \PHPlot(800, 600);
-        $plot->SetImageBorderType('plain');
-        $plot->SetPlotType('lines');
-        $plot->SetDataType('data-data');
-        $plot->SetDataValues($this->plotData);
-        $plot->SetTitle($plotName);
-        $plot->SetPlotAreaWorld(NULL, $this->minSampleValue, NULL, NULL);
-        $plot->SetIsInline(true);
-        $plot->SetOutputFile($filename);
-        $plot->DrawGraph();
+        PlotGenerator::generate($this->plotData, $plotName, $filename, $this->minSampleValue);
     }
 
     public function getSamples(): array
