@@ -74,6 +74,7 @@ class GuitarString
 
             $this->ringBuffer->enqueue($newSample);
         } catch (\Exception $exception) {
+            echo $exception->getMessage() . PHP_EOL;
         }
     }
 
@@ -85,6 +86,7 @@ class GuitarString
         try {
             return $this->ringBuffer->peek();
         } catch (\Exception $exception) {
+            echo $exception->getMessage() . PHP_EOL;
             return null;
         }
     }

@@ -298,7 +298,7 @@ function playKeyboard(){
 		}
 	
 	}
-	// Generates audio for pressed note and returns that to be played
+	// Request audio for pressed note and returns that to be played
 	var fnPlayNote = function(note, octave) {
 		src = 'http://127.0.0.1:8000/?note=' + encodeURIComponent(note) + '_' + octave;
 		container = new Audio(src);

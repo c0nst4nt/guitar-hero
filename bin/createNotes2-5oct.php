@@ -26,7 +26,7 @@ foreach ($notes as $chromaticNote) {
     $octave    = min(8, max(1, $octave));
 
     $frequency = Note::get($note) * pow(2, $octave - 4);
-    $string    = (new GuitarStringSynthesizer($frequency, 2));
+    $string    = (new GuitarStringSynthesizer($frequency, 1));
 
     $samples   = $string->getSamples();
     $noteSample = new Sample(sizeof($samples), implode('', $samples));
@@ -52,4 +52,4 @@ foreach ($notes as $chromaticNote) {
 
 $endTime = new DateTime('now');
 $interval = $startTime->diff($endTime);
-echo $interval->format('%S.%f s') . PHP_EOL;
+echo $interval->format('%s.%f s') . PHP_EOL;

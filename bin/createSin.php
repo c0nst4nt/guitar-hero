@@ -4,30 +4,33 @@ use GuitarHero\PlotGenerator;
 
 require_once './vendor/autoload.php';
 
-ini_set('error_reporting', E_ALL & ~E_NOTICE & ~E_DEPRECATED);
+$frequency = 440;
 
-$generatedNoiseSmall = [];
+$generatedSinSmall = [];
 for ($i = 0; $i < 100; $i++) {
-    $generatedNoiseSmall[] = ['', $i, mt_rand(-0.5 * 1000000, 0.5 * 1000000) / 1000000];
+    $a = 2 * M_PI * $frequency / 44100;
+    $sample = sin($a * $i);
+    $generatedSinSmall[] = ['', $i, $sample];
 }
 
-PlotGenerator::generate($generatedNoiseSmall, 'White noise, small', './generated/images/white_noise_example_short.png', -0.5);
+PlotGenerator::generate($generatedSinSmall, 'Sinusoid, small', './generated/images/sinusoid_small.png', -1);
 
-$generatedNoise = [];
+$generatedSin = [];
 for ($i = 0; $i < 44100; $i++) {
-    $sample = mt_rand(-0.5 * 1000000, 0.5 * 1000000) / 1000000 * 32768;
+    $a = 2 * M_PI * $frequency / 44100;
+    $sample = sin($a * $i) * 32768;
 
-    $generatedNoise[] = ['', $i, $sample];
+    $generatedSin[] = ['', $i, $sample];
 
     $samples[$i << 1] = pack('c', $sample);
     $samples[($i << 1) + 1] = pack('c', $sample >> 8);
 }
 
-PlotGenerator::generate($generatedNoise, 'White noise, long', './generated/images/white_noise_example_long.png', -17768);
+PlotGenerator::generate($generatedSin, 'Sinusoid', './generated/images/sinusoid.png', -32768);
 
 $samplesString = join('', $samples);
 
-$handle = fopen('./generated/audio/white_noise.wav', 'wb');
+$handle = fopen('./generated/audio/sin.wav', 'wb');
 
 fwrite($handle, pack('a*', 'RIFF')); // RIFF (symbols)
 fwrite($handle, pack('V', 40 + strlen($samplesString))); // chunk size

@@ -69,9 +69,4 @@ class GuitarStringSynthesizer
 
         return $this->generatedSamples;
     }
-
-    public function getPlotData()
-    {
-        return $this->plotData;
-    }
 }
